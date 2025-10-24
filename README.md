@@ -54,8 +54,9 @@ candump can0   # verify frames with ignition on
 ```
 
 ## DBC file
-Place your E46 DBC at `./dbc/e46.dbc` and set that path in `config/config.yaml`.
-- You can also run `./scripts/fetch_e46_dbc.sh` to download a community DBC into `./dbc/`.
+-A curated MS43 PT-CAN DBC is included at `./dbc/e46.dbc` (see file header for provenance and supported signals).
+  Copy or adjust as you validate additional channels on your vehicle.
+- If you prefer to fetch an alternative mapping, `./scripts/fetch_e46_dbc.sh` remains available to download a community DBC into `./dbc/`.
 - Signals differ slightly by trim/year; validate on your car. Manual fallbacks cover common channels.
 
 ## Systemd install

@@ -1,0 +1,39 @@
+VERSION "BMW E46 330i MS43 PT-CAN (v1.0, 2025-10-24)"
+CM_ "Minimal but accurate MS43 E46 PT-CAN DBC for telemetry: RPM, coolant temp, oil temp, TPS, and a few booleans.
+Derived from public documentation (MS4X wiki) and community research; validate signals on your car.";
+
+CM_ BU_ DME "Engine ECU (MS43)";
+
+BO_ 790 DME1: 8 DME
+CM_ BO_ 790 "DME1 (0x316), 10ms";
+SG_ N_ENG : 16|16@1+ (0.15625,0) [0|10000] "rpm" DME
+SG_ TQI_TQR_CAN : 8|8@1+ (0.390625,0) [0|100] "%" DME
+SG_ TQI_CAN : 32|8@1+ (0.390625,0) [0|100] "%" DME
+SG_ TQ_LOSS_CAN : 40|8@1+ (0.390625,0) [0|100] "%" DME
+
+BO_ 809 DME2: 8 DME
+CM_ BO_ 809 "DME2 (0x329), 10ms";
+SG_ TEMP_ENG : 8|8@1+ (0.75,-48) [-48|150] "degC" DME
+SG_ TPS_VIRT_CRU_CAN : 32|8@1+ (0.390625,0) [0|100] "%" DME
+SG_ TPS_CAN : 40|8@1+ (0.390625,0) [0|100] "%" DME
+SG_ LV_ERU_CAN : 27|1@1+ (1,0) [0|1] "engine_running" DME
+SG_ LV_BS : 48|1@1+ (1,0) [0|1] "brake_switch" DME
+
+BO_ 824 DME3: 8 DME
+CM_ BO_ 824 "DME3 (0x338), 1000ms or on change (Alpina/SMG context)";
+SG_ STATE_SOF_CAN : 16|8@1+ (1,0) [0|3] "sport_button_state" DME
+
+BO_ 1349 DME4: 8 DME
+CM_ BO_ 1349 "DME4 (0x545), 10ms";
+SG_ TOIL_CAN : 32|8@1+ (1,-48) [-48|206] "degC" DME
+SG_ LV_MIL : 1|1@1+ (1,0) [0|1] "check_engine_lamp" DME
+SG_ LV_TEMP_ENG : 27|1@1+ (1,0) [0|1] "coolant_overheat_lamp" DME
+
+CM_ SG_ N_ENG "Engine speed (rpm) = ((MSB*256)+LSB) * 0.15625 (LSB at byte2, MSB at byte3).";
+CM_ SG_ TEMP_ENG "Coolant temp (°C) = value*0.75 - 48.";
+CM_ SG_ TOIL_CAN "Oil temp (°C) = value - 48.";
+CM_ SG_ TPS_CAN "Throttle / Accelerator pedal position (%) = value * 0.390625.";
+
+VAL_ STATE_SOF_CAN 0 "SportOn_by_SMG" 1 "SportOff" 2 "SportOn" 3 "SportError";
+
+CM_ "Sources consulted: MS4X Siemens MS43 CAN Bus article (IDs, byte layouts, scaling), Autosport Labs E46 mapping, and community posts for sanity checks. This file is intentionally concise. Extend as you validate more signals on your specific car.";

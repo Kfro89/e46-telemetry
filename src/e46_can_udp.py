@@ -82,12 +82,30 @@ def decode_manual(can_id: int, data: bytes) -> Dict[str, float]:
 # -----------------------------
 
 CANONICAL_KEYS = {
-    "rpm": ["RPM", "Engine_RPM", "engine_rpm", "rpm"],
-    "coolant_c": ["EngineTemp", "CoolantTemp", "coolant_temp", "coolant_c"],
-    "oil_temp_c": ["OilTemp", "oil_temp_c", "oil_temp"],
-    "tps_pct": ["TPS", "Throttle", "throttle_pct", "tps_pct"],
+    "rpm": ["RPM", "Engine_RPM", "engine_rpm", "rpm", "N_ENG"],
+    "coolant_c": [
+        "EngineTemp",
+        "CoolantTemp",
+        "coolant_temp",
+        "coolant_c",
+        "TEMP_ENG",
+    ],
+    "oil_temp_c": ["OilTemp", "oil_temp_c", "oil_temp", "TOIL_CAN"],
+    "tps_pct": [
+        "TPS",
+        "Throttle",
+        "throttle_pct",
+        "tps_pct",
+        "TPS_CAN",
+        "TPS_VIRT_CRU_CAN",
+    ],
     "vehicle_speed_kph": ["VehicleSpeed", "Speed", "vehicle_speed", "speed_kph"],
     "fuel_pct": ["FuelLevel", "fuel_level", "fuel_pct"],
+    "engine_running": ["engine_running", "LV_ERU_CAN"],
+    "brake_switch": ["brake_switch", "LV_BS"],
+    "check_engine_lamp": ["check_engine_lamp", "LV_MIL"],
+    "coolant_overheat_lamp": ["coolant_overheat_lamp", "LV_TEMP_ENG"],
+    "sport_button_state": ["sport_button_state", "STATE_SOF_CAN"],
 }
 
 
