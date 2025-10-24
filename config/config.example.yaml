@@ -1,0 +1,19 @@
+# SocketCAN interface
+interface: can0
+
+# Path to the DBC file (place your e46.dbc here or adjust to absolute path)
+dbc: ./dbc/e46.dbc
+
+# UDP destination
+host: 192.168.1.50
+port: 9000
+
+# Emit rate (Hz)
+rate_hz: 10
+
+# Also print JSON locally (stdout) for debugging
+print: true
+
+# Optional: limit to these 11-bit CAN IDs (improves CPU on busy buses)
+# Provide as hex strings or integers
+filters: [0x316, 0x329, 0x545]

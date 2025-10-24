@@ -1,0 +1,15 @@
+[Unit]
+Description=E46 PT-CAN → UDP Telemetry
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 __REPO_DIR__/src/e46_can_udp.py --config __REPO_DIR__/config/config.yaml
+Restart=always
+User=pi
+WorkingDirectory=__REPO_DIR__
+
+[Install]
+WantedBy=multi-user.target
