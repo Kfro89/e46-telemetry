@@ -235,7 +235,9 @@ def main() -> int:
             # DBC first
             if db:
                 try:
-                    decoded = db.decode_message(msg.arbitration_id, bytes(msg.data))
+                    decoded = db.decode_message(
+                        msg.arbitration_id, bytes(msg.data), decode_choices=False
+                    )
                     merged.update(decoded)
                 except Exception:
                     pass
